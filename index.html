@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Telecom KPI Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">T</div>
+        <div>
+          <strong>Telecom KPI</strong>
+          <span>Sales control</span>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a class="active" href="#dashboard">Dashboard</a>
+        <a href="#imports">Импорт</a>
+        <a href="#reports">Отчеты</a>
+        <a href="#settings">Настройки KPI</a>
+        <a href="#history">История</a>
+      </nav>
+
+      <div class="status-card">
+        <span>Проверка заполнения</span>
+        <strong>Сегодня, 19:00</strong>
+        <p>Будние дни: уведомления при отсутствии данных. Воскресенье без уведомлений.</p>
+      </div>
+    </aside>
+
+    <main class="page">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">KPI Dashboard для управления продажами подразделений</p>
+          <h1>ИТОГО ПО ОБЛАСТИ</h1>
+        </div>
+        <div class="topbar-actions">
+          <button class="ghost">Экспорт PDF</button>
+          <button class="primary">Загрузить Excel</button>
+        </div>
+      </header>
+
+      <section id="dashboard" class="kpi-grid" aria-label="KPI cards">
+        <article class="kpi-card positive">
+          <span>Продажи</span>
+          <strong>42.8 млн ₸</strong>
+          <small>87% от плана</small>
+        </article>
+        <article class="kpi-card warning">
+          <span>Отток</span>
+          <strong>-3.4 млн ₸</strong>
+          <small>12% выше нормы</small>
+        </article>
+        <article class="kpi-card">
+          <span>ШПД</span>
+          <strong>1 248</strong>
+          <small>FTTX, ADSL, БШПД, GPON</small>
+        </article>
+        <article class="kpi-card">
+          <span>ТВ</span>
+          <strong>816</strong>
+          <small>IPTV и OTT</small>
+        </article>
+        <article class="kpi-card">
+          <span>FMS</span>
+          <strong>2 940</strong>
+          <small>Мобильные услуги</small>
+        </article>
+        <article class="kpi-card muted">
+          <span>Неотчитались</span>
+          <strong>7</strong>
+          <small>из 184 сотрудников</small>
+        </article>
+      </section>
+
+      <section class="toolbar" aria-label="Dashboard filters">
+        <label>
+          Поиск
+          <input id="searchInput" type="search" placeholder="Подразделение, сотрудник, KPI..." />
+        </label>
+        <label>
+          Период
+          <select id="periodSelect">
+            <option>День</option>
+            <option>Неделя</option>
+            <option selected>Месяц</option>
+            <option>Произвольный период</option>
+          </select>
+        </label>
+        <div class="segments" role="group" aria-label="Display mode">
+          <button class="segment active" data-mode="all">План / Факт / %</button>
+          <button class="segment" data-mode="percent">Только %</button>
+          <button class="segment" data-mode="fact">Только факт</button>
+          <button class="segment" data-mode="plan">Только план</button>
+        </div>
+      </section>
+
+      <section class="dashboard-table-wrap" aria-label="KPI table">
+        <table class="dashboard-table" id="dashboardTable">
+          <thead>
+            <tr>
+              <th rowspan="2">Подразделение / сотрудник</th>
+              <th colspan="3" data-kpi="sales">Продажи</th>
+              <th colspan="3" data-kpi="churn">Отток</th>
+              <th colspan="3" data-kpi="broadband">ШПД</th>
+              <th colspan="3" data-kpi="tv">ТВ</th>
+              <th colspan="3" data-kpi="fms">FMS</th>
+            </tr>
+            <tr>
+              <th data-col="plan">План</th>
+              <th data-col="fact">Факт</th>
+              <th data-col="percent">%</th>
+              <th data-col="plan">План</th>
+              <th data-col="fact">Факт</th>
+              <th data-col="percent">%</th>
+              <th data-col="plan">План</th>
+              <th data-col="fact">Факт</th>
+              <th data-col="percent">%</th>
+              <th data-col="plan">План</th>
+              <th data-col="fact">Факт</th>
+              <th data-col="percent">%</th>
+              <th data-col="plan">План</th>
+              <th data-col="fact">Факт</th>
+              <th data-col="percent">%</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="total-row">
+              <td>ИТОГО ПО ОБЛАСТИ</td>
+              <td data-col="plan">49.2</td><td data-col="fact">42.8</td><td data-col="percent">87%</td>
+              <td data-col="plan">-2.8</td><td data-col="fact">-3.4</td><td data-col="percent">121%</td>
+              <td data-col="plan">1 420</td><td data-col="fact">1 248</td><td data-col="percent">88%</td>
+              <td data-col="plan">930</td><td data-col="fact">816</td><td data-col="percent">88%</td>
+              <td data-col="plan">3 150</td><td data-col="fact">2 940</td><td data-col="percent">93%</td>
+            </tr>
+            <tr class="division-row" data-division="karaganda">
+              <td><button class="toggle" aria-expanded="true">▼</button> Караганда</td>
+              <td data-col="plan">18.0</td><td data-col="fact">16.7</td><td data-col="percent">93%</td>
+              <td data-col="plan">-1.0</td><td data-col="fact">-1.1</td><td data-col="percent">110%</td>
+              <td data-col="plan">520</td><td data-col="fact">498</td><td data-col="percent">96%</td>
+              <td data-col="plan">330</td><td data-col="fact">291</td><td data-col="percent">88%</td>
+              <td data-col="plan">1 050</td><td data-col="fact">1 012</td><td data-col="percent">96%</td>
+            </tr>
+            <tr class="employee-row" data-parent="karaganda">
+              <td>Иванов</td>
+              <td data-col="plan">6.0</td><td data-col="fact">5.9</td><td data-col="percent">98%</td>
+              <td data-col="plan">-0.3</td><td data-col="fact">-0.2</td><td data-col="percent">67%</td>
+              <td data-col="plan">170</td><td data-col="fact">164</td><td data-col="percent">96%</td>
+              <td data-col="plan">110</td><td data-col="fact">101</td><td data-col="percent">92%</td>
+              <td data-col="plan">350</td><td data-col="fact">344</td><td data-col="percent">98%</td>
+            </tr>
+            <tr class="employee-row" data-parent="karaganda">
+              <td>Петров</td>
+              <td data-col="plan">6.5</td><td data-col="fact">5.6</td><td data-col="percent">86%</td>
+              <td data-col="plan">-0.4</td><td data-col="fact">-0.5</td><td data-col="percent">125%</td>
+              <td data-col="plan">180</td><td data-col="fact">169</td><td data-col="percent">94%</td>
+              <td data-col="plan">120</td><td data-col="fact">94</td><td data-col="percent">78%</td>
+              <td data-col="plan">360</td><td data-col="fact">337</td><td data-col="percent">94%</td>
+            </tr>
+            <tr class="employee-row" data-parent="karaganda">
+              <td>Сидоров</td>
+              <td data-col="plan">5.5</td><td data-col="fact">5.2</td><td data-col="percent">95%</td>
+              <td data-col="plan">-0.3</td><td data-col="fact">-0.4</td><td data-col="percent">133%</td>
+              <td data-col="plan">170</td><td data-col="fact">165</td><td data-col="percent">97%</td>
+              <td data-col="plan">100</td><td data-col="fact">96</td><td data-col="percent">96%</td>
+              <td data-col="plan">340</td><td data-col="fact">331</td><td data-col="percent">97%</td>
+            </tr>
+            <tr class="division-row" data-division="temirtau">
+              <td><button class="toggle" aria-expanded="true">▼</button> Темиртау</td>
+              <td data-col="plan">14.6</td><td data-col="fact">12.1</td><td data-col="percent">83%</td>
+              <td data-col="plan">-0.8</td><td data-col="fact">-1.0</td><td data-col="percent">125%</td>
+              <td data-col="plan">440</td><td data-col="fact">376</td><td data-col="percent">85%</td>
+              <td data-col="plan">280</td><td data-col="fact">239</td><td data-col="percent">85%</td>
+              <td data-col="plan">980</td><td data-col="fact">872</td><td data-col="percent">89%</td>
+            </tr>
+            <tr class="employee-row" data-parent="temirtau">
+              <td>Ахметова</td>
+              <td data-col="plan">7.2</td><td data-col="fact">6.1</td><td data-col="percent">85%</td>
+              <td data-col="plan">-0.4</td><td data-col="fact">-0.6</td><td data-col="percent">150%</td>
+              <td data-col="plan">220</td><td data-col="fact">184</td><td data-col="percent">84%</td>
+              <td data-col="plan">140</td><td data-col="fact">118</td><td data-col="percent">84%</td>
+              <td data-col="plan">490</td><td data-col="fact">431</td><td data-col="percent">88%</td>
+            </tr>
+            <tr class="employee-row" data-parent="temirtau">
+              <td>Нурмагамбетов</td>
+              <td data-col="plan">7.4</td><td data-col="fact">6.0</td><td data-col="percent">81%</td>
+              <td data-col="plan">-0.4</td><td data-col="fact">-0.4</td><td data-col="percent">100%</td>
+              <td data-col="plan">220</td><td data-col="fact">192</td><td data-col="percent">87%</td>
+              <td data-col="plan">140</td><td data-col="fact">121</td><td data-col="percent">86%</td>
+              <td data-col="plan">490</td><td data-col="fact">441</td><td data-col="percent">90%</td>
+            </tr>
+            <tr class="division-row" data-division="balkhash">
+              <td><button class="toggle" aria-expanded="true">▼</button> Балхаш</td>
+              <td data-col="plan">16.6</td><td data-col="fact">14.0</td><td data-col="percent">84%</td>
+              <td data-col="plan">-1.0</td><td data-col="fact">-1.3</td><td data-col="percent">130%</td>
+              <td data-col="plan">460</td><td data-col="fact">374</td><td data-col="percent">81%</td>
+              <td data-col="plan">320</td><td data-col="fact">286</td><td data-col="percent">89%</td>
+              <td data-col="plan">1 120</td><td data-col="fact">1 056</td><td data-col="percent">94%</td>
+            </tr>
+            <tr class="employee-row" data-parent="balkhash">
+              <td>Ким</td>
+              <td data-col="plan">8.2</td><td data-col="fact">7.0</td><td data-col="percent">85%</td>
+              <td data-col="plan">-0.5</td><td data-col="fact">-0.6</td><td data-col="percent">120%</td>
+              <td data-col="plan">230</td><td data-col="fact">188</td><td data-col="percent">82%</td>
+              <td data-col="plan">160</td><td data-col="fact">147</td><td data-col="percent">92%</td>
+              <td data-col="plan">560</td><td data-col="fact">529</td><td data-col="percent">94%</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="info-grid">
+        <article id="imports" class="info-panel">
+          <h2>Импорт Excel</h2>
+          <p>Администратор загружает планы на день, неделю или месяц и ежедневные файлы продаж до 100 000 строк.</p>
+          <ul>
+            <li>Сумма больше 0 относится к продажам.</li>
+            <li>Сумма меньше 0 относится к оттоку.</li>
+            <li>Файл автоматически обновляет KPI и Dashboard.</li>
+          </ul>
+        </article>
+        <article id="settings" class="info-panel">
+          <h2>Настройки KPI</h2>
+          <div class="mapping">
+            <span>FTTX → ШПД</span>
+            <span>ADSL → ШПД</span>
+            <span>GPON → ШПД</span>
+            <span>IPTV → ТВ</span>
+            <span>OTT → ТВ</span>
+            <span>FMS → FMS</span>
+          </div>
+        </article>
+        <article id="reports" class="info-panel">
+          <h2>Отчеты</h2>
+          <p>Экспорт за день, неделю, месяц или произвольный период в Excel и PDF.</p>
+          <div class="report-actions">
+            <button>Excel</button>
+            <button>PDF</button>
+          </div>
+        </article>
+        <article id="history" class="info-panel">
+          <h2>История изменений</h2>
+          <p>Система хранит кто, когда и что изменил, включая старое и новое значение.</p>
+        </article>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
